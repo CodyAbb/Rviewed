@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rviewed.wsgi.application'
 
+#Extended user model
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
