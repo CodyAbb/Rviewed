@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axiosInstance from "../axiosApi";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -6,6 +7,7 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     if (event.target.name === "username") {
@@ -22,8 +24,22 @@ export default function SignUp() {
   };
 
   const handleSubmit = (event) => {
-    alert(username + password);
     event.preventDefault();
+    axiosInstance
+      .post("/user/create/", {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error.stack);
+        setErrors(error.response.data);
+      });
   };
 
   return (
@@ -39,6 +55,7 @@ export default function SignUp() {
             onChange={handleChange}
             required
           />
+          {errors.email ? errors.email : null}
         </label>
         <label>
           First Name:
@@ -49,6 +66,7 @@ export default function SignUp() {
             onChange={handleChange}
             required
           />
+          {errors.firstName ? errors.firstName : null}
         </label>
         <label>
           Last Name:
@@ -59,6 +77,7 @@ export default function SignUp() {
             onChange={handleChange}
             required
           />
+          {errors.lastName ? errors.lastName : null}
         </label>
 
         <label>
@@ -71,6 +90,7 @@ export default function SignUp() {
             onChange={handleChange}
             required
           />
+          {errors.username ? errors.username : null}
         </label>
         <label>
           Password:
@@ -81,6 +101,7 @@ export default function SignUp() {
             onChange={handleChange}
             required
           />
+          {errors.password ? errors.password : null}
         </label>
         <input type="submit" value="Sign me up" />
       </form>

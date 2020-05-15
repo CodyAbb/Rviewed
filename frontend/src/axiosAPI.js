@@ -17,11 +17,14 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
+      // This is the error code django will send if unathorized
       error.response.status === 401 &&
       error.response.statusText === "Unauthorized"
     ) {
+      // Will retrieve access token
       const refresh_token = localStorage.getItem("refresh_token");
 
+      // Then send refresh token to get new access and refresh tokens
       return axiosInstance
         .post("/token/refresh/", { refresh: refresh_token })
         .then((response) => {
