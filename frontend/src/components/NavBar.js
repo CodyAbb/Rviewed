@@ -13,6 +13,9 @@ export default function NavBar() {
       <Link className={"nav-link"} to={"/signup/"}>
         Signup
       </Link>
+      <Link className={"nav-link"} to={"/hello/"}>
+        Hello
+      </Link>
     </nav>
   );
 }

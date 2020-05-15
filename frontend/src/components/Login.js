@@ -1,20 +1,38 @@
 import React, { useState } from "react";
+import axiosInstance from "../axiosApi";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChange = (event) => {
-    if (event.target.name === "username") {
-      setUsername(event.target.value);
+    if (event.target.name === "email") {
+      setEmail(event.target.value);
     } else {
       setPassword(event.target.value);
     }
   };
 
   const handleSubmit = (event) => {
-    alert(username + password);
     event.preventDefault();
+
+    // This is the original axios firing off to get access and refresh tokens
+    axiosInstance
+      .post("/token/obtain/", {
+        email: email,
+        password: password,
+      })
+      .then((result) => {
+        axiosInstance.defaults.headers["Authorization"] =
+          "JWT " + result.data.access;
+        // console.log(result.data.access);
+
+        localStorage.setItem("access_token", result.data.access);
+        localStorage.setItem("refresh_token", result.data.refresh);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   return (
@@ -22,11 +40,11 @@ export default function Login() {
       <h2>Welcome Back!</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Username:
+          Email:
           <input
-            name="username"
+            name="email"
             type="text"
-            value={username}
+            value={email}
             onChange={handleChange}
           />
         </label>
