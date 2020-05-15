@@ -25,8 +25,6 @@ export default function Login() {
       .then((result) => {
         axiosInstance.defaults.headers["Authorization"] =
           "JWT " + result.data.access;
-        // console.log(result.data.access);
-
         localStorage.setItem("access_token", result.data.access);
         localStorage.setItem("refresh_token", result.data.refresh);
       })
