@@ -111,6 +111,13 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'rviewed.utils.custom_jwt_response_handler'
+}
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

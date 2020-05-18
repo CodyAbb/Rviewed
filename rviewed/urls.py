@@ -13,12 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from rest_framework_jwt.views import obtain_jwt_token
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('token-auth/', obtain_jwt_token),
     path('api/', include('authentication.urls')),
-    #make sure this route is at the end so react router can handle the rest
-    path('', include('frontend.urls'))
+    path('', include('frontend.urls')),
 ]

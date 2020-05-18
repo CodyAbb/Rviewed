@@ -28,8 +28,8 @@ export default function SignUp() {
     axiosInstance
       .post("/user/create/", {
         email: email,
-        firstName: firstName,
-        lastName: lastName,
+        first_name: firstName,
+        last_name: lastName,
         username: username,
         password: password,
       })
