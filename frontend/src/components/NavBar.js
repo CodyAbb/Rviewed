@@ -1,7 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../axiosApi";
 
 export default function NavBar() {
+  const handleLogout = () => {
+    axiosInstance
+      .post("/blacklist/", {
+        refresh_token: localStorage.getItem("refresh_token"),
+      })
+      .then((response) => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        axiosInstance.defaults.headers["Authorization"] = null;
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <nav>
       <Link className={"nav-link"} to={"/"}>
@@ -16,6 +33,7 @@ export default function NavBar() {
       <Link className={"nav-link"} to={"/hello/"}>
         Hello
       </Link>
+      <button onClick={handleLogout}>Logout</button>
     </nav>
   );
 }
