@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axiosInstance from "../axiosApi";
+import axiosInstance from "../../axiosApi";
 
 export default function NavBar() {
   const handleLogout = () => {
