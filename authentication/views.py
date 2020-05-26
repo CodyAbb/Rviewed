@@ -26,11 +26,6 @@ class CreateUserView(APIView):
             return Response({"response" : "error", "message" : serializer.errors})
         return Response({"response" : "success", "message" : "user created succesfully"})
 
-
-class HelloWorld(APIView):
-    def get(self, request):
-        return Response(data={'hello':'world'}, status=status.HTTP_200_OK)
-
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
     permission_classes = (permissions.AllowAny,)
     authentification_classes = ()

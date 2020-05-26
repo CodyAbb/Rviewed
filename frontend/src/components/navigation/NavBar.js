@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axiosApi";
 
-export default function NavBar() {
+export default function NavBar({ authAllowed }) {
   const handleLogout = () => {
     axiosInstance
       .post("/blacklist/", {
@@ -18,6 +18,8 @@ export default function NavBar() {
         console.log(error);
       });
   };
+
+  // const authLinkChange = authAllowed ? () : ()
 
   return (
     <nav>
