@@ -16,15 +16,11 @@ export default function App() {
       .get("/current_user/")
       .then((res) => setUsername(res.data.username))
       .catch((err) => console.log(`Username undefined: ${err}`));
-    // .then((res) => res.json())
-    // .then((data) => console.log(data))
-    // // .then((data) => setUsername(data.username))
-    // .catch((error) => console.log(error));
   }, []);
 
   return (
     <div>
-      <NavBar authAllowed={authAllowed} />
+      <NavBar authAllowed={authAllowed} currentUsername={username} />
       <main>
         <Switch>
           <Route exact path={"/login/"} component={Login} />
